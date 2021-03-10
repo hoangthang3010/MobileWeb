@@ -10,8 +10,8 @@
             background-color: white;
             text-align: left;
             padding: 15px;
-            border: 0px;
             max-height: 50px;
+            border-radius: 0px;
             span{
                 font-size: larger;
             }
@@ -27,11 +27,11 @@
         }
         &:hover &__right{
             display: block;
-            min-height: 250px;
+            min-height: 252px;
             padding: 18px;
             position: absolute;
             transform: translate3d(198px, 0px, 0px);
-            top: 0px;
+            top: -1px;
             left: 0px;
             will-change: transform;
             min-width: 200px;

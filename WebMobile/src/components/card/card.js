@@ -41,7 +41,9 @@ const Cart = ()=>{
             product1 && product1.length !== 0 ? (
                 <div className='checkout'>
                     <div className='checkout__top card-group'>
-                        <p className='checkout__top__back col-6'>Tiếp tục tìm kiếm sản phẩm</p>
+                        <Link to='/'>
+                         <p className='checkout__top__back col-6'>Tiếp tục tìm kiếm sản phẩm</p>
+                        </Link>
                         <h2 className='checkout__top__title col-6'>Giỏ hàng của bạn</h2>
                     </div>
                     <hr />
@@ -79,7 +81,9 @@ const Cart = ()=>{
                 <div className="noitem">
                     <SentimentVeryDissatisfiedIcon/>
                     <span>Không có sản phẩm nào trong giỏ hàng</span>
-                    <button>Quay lại trang chủ</button>
+                    <Link to='/'>
+                        <button>Quay lại trang chủ</button>
+                    </Link>
                 </div>
             ) 
         }
