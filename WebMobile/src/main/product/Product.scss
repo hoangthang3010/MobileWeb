@@ -22,10 +22,11 @@
                 background-color: #F5F8FD;
             }
         }
+        // &__right{
+        //     display: none;
+        // }
+        // &:hover 
         &__right{
-            display: none;
-        }
-        &:hover &__right{
             display: block;
             min-height: 252px;
             padding: 18px;

@@ -94,7 +94,7 @@ export default function Product() {
             return (
               <>
                 <div 
-                  className="btn product__drop__item" 
+                  className="product__drop__item" 
                   style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
                   onMouseEnter={() => onHandleShowDrop(index)}
                   onMouseLeave={() => onHandleDisShowDrop()}
@@ -110,13 +110,18 @@ export default function Product() {
         }
         {
           listmenu[showDrop].drop.map((item) => {
-            item.name && 
-            item.name !== '' ? 
-            (<div className="product__drop__right">
-                <div>
-                    {/* <span>{listmenu[showDrop].drop}</span> */}
+            console.log(item);
+            return(
+              item.name && 
+              item.name !== '' ? (
+                <div style={{display: 'inline-grid'}}>
+                  <div className="product__drop__right">
+                      <span>{item.name}</span>
+                  </div>
                 </div>
-            </div>) : ''
+              ) : ''
+            )
+            
           })
         }
         {/* {
