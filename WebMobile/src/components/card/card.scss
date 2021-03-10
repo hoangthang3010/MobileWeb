@@ -1,0 +1,103 @@
+.checkout{
+    width: 50%;
+    margin:10px auto;
+    display: flow-root;
+    .card-group{
+        .col-4{
+            max-width: 100%;
+            flex: 0 0 25%;
+        }
+        .col-6{
+            max-width: 100%;
+        }
+        .col-8{
+            max-width: 100%;
+        }
+    }
+    &__top{
+        width: 100%;
+        &__back{
+
+        }
+        &__title{
+            font-size: 25px;
+            font-weight: 400;
+        }
+    }
+    &__item{
+        &__image{
+            border-right: 1px solid black;
+            img{
+                
+                // padding: 20px 0px;
+                width: inherit;
+            }
+        }
+        &__detail{
+            // display: grid;
+            // display: block;
+            // margin-top: 20px;
+            h2{
+                font-size: 13px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                text-decoration: none;
+            }
+            span{
+                font-size: 14px;
+                color: red;
+            }
+            &__count{
+                display: flex;
+                margin-top: 20%;
+                float: right;
+                justify-self: self-end;
+                align-self: center;
+                p{
+                    color: black;
+                    padding: 5px 12px;
+                    text-decoration: none;
+                    &:hover{
+                        background-color: #e1e4e9;
+                    }
+                }
+                &--num{
+                    border-top: 1px solid #e1e4e9;
+                    border-bottom: 1px solid #e1e4e9;
+                }
+                &--change{
+                    border: 1px solid #e1e4e9;
+                }
+            }
+        }
+        
+    }
+    &__total{
+        float: right;
+        margin-top: 20px;
+    }
+}
+.noitem{
+    text-align: center;
+    margin:40px auto;
+    width: 60%;
+    svg{
+        font-size: 50px;
+    }
+    span{
+        display: flow-root;
+        font-size: 30px;
+    }
+    button{
+        border: 0px;
+        border-radius: 4px;
+        padding:10px 20px;
+        background-color: #F51F58;
+        display: flex;
+        color: white;
+        margin: 20px auto;
+        &:hover{
+            background-color: #b80c3a;
+        }
+    }
+}

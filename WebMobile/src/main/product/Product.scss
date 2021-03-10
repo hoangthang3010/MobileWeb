@@ -1,0 +1,29 @@
+.product{
+    background-color: #F5F8FD;
+    &__dropright{
+        min-width: 200px;
+        display: inline-grid;
+        margin: 30px;
+        border: 1px solid #eaedf3;
+        &__item{
+            font-weight: 600;
+            background-color: white;
+            text-align: left;
+            padding: 15px;
+            border: 0px;
+            span{
+                font-size: larger;
+            }
+            a{
+                float: right;
+            }
+            &:hover{
+                background-color: #F5F8FD;
+            }
+        }
+        &:hover .dropdown-menu{
+            display: block;
+        }
+    }
+}
+
