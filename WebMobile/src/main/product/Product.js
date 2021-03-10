@@ -1,50 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Product.scss'
 
 export default function Product() {
   const listmenu = [
     {
-      title: "Điện thoại di động"
+      title: "Điện thoại di động",
+      drop: "hi"
     },
     {
-      title: "Đồng hồ thông minh"
+      title: "Đồng hồ thông minh",
+      drop: "ha"
     },
     {
-      title: "Máy tính bảng"
+      title: "Máy tính bảng",
+      drop: "hehe"
     },
     {
-      title: "Laptop - Pc"
+      title: "Laptop - Pc",
+      drop: "huhuhu"
     },
     {
-      title: "Phụ kiện"
+      title: "Phụ kiện",
     },
   ]
+  const [showDrop, setShowDrop] = useState('0')
+  const [id, setId] = useState()
+  const onHandleShowDrop = (index) =>{
+    setShowDrop(index)
+    setId(index)
+  }
+  const onHandleDisShowDrop = () => {
+    setId()
+  }
   return (
     <div className="product">
-        <div className="product__dropright btn-group dropright">
-          {
-            listmenu && listmenu.map((item) => {
-              return (
-                <div className="product__dropright__item">
+      <div className="product__drop dropright">
+        {
+          listmenu && listmenu.map((item, index) => {
+            return (
+              <>
+                <div 
+                  className="btn product__drop__item" 
+                  style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
+                  onMouseEnter={() => onHandleShowDrop(index)}
+                  onMouseLeave={() => onHandleDisShowDrop()}
+                >
                   <span>{item.title} </span>
-                  <a>&rsaquo;</a>
+                  {
+                    item.drop  ?  <a>&rsaquo;</a> : ''
+                  }
                 </div>
-              )
-            })
-            
-          }
-            
-          <div className="product__dropright__right dropdown-menu">
-            <a className="dropdown-item" href="#">Action</a>
-            <a className="dropdown-item" href="#">Another action</a>
-            <a className="dropdown-item" href="#">Something else here</a>
-            <div className="dropdown-divider" />
-            <a className="dropdown-item" href="#">Separated link</a>
+              </>
+            )
+          })
+        }
+          <div className="product__drop__right">
+            {
+              <div 
+                  // className="btn product__drop__item" 
+                  // style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
+                  // onMouseEnter={() => onHandleShowDrop(index)}
+                  // onMouseLeave={() => onHandleDisShowDrop()}
+                >
+              <span>{listmenu[showDrop].drop}</span>
+              {
+                // item.drop  ?  <a>&rsaquo;</a> : ''
+              }
+            </div>
+             
+            }
+            {/* <div className="dropdown-divider" />  */}
           </div>
-        </div>
+      </div>
     </div>
   )
 }
+
+                  {/* <div className="product__dropright__item" onClick={() => onHandleDrop(index)}>
+                    <span>{item.title} </span>
+                    <a>&rsaquo;</a>
+                  </div> */}
+                  
 {/* <div className="product">
         <div className="product__dropright btn-group dropright">
           <button 

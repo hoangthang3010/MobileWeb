@@ -1,6 +1,6 @@
 .product{
     background-color: #F5F8FD;
-    &__dropright{
+    &__drop{
         min-width: 200px;
         display: inline-grid;
         margin: 30px;
@@ -11,6 +11,7 @@
             text-align: left;
             padding: 15px;
             border: 0px;
+            max-height: 50px;
             span{
                 font-size: larger;
             }
@@ -21,9 +22,27 @@
                 background-color: #F5F8FD;
             }
         }
-        &:hover .dropdown-menu{
-            display: block;
+        &__right{
+            display: none;
         }
+        &:hover &__right{
+            display: block;
+            min-height: 250px;
+            padding: 18px;
+            position: absolute;
+            transform: translate3d(198px, 0px, 0px);
+            top: 0px;
+            left: 0px;
+            will-change: transform;
+            min-width: 200px;
+            background-color: white;
+            border: 1px solid #eaedf3;
+            font-weight: 600;
+            font-size: larger;
+        }
+        // &:hover .dropdown-menu{
+        //     display: block;
+        // }
     }
 }
 
