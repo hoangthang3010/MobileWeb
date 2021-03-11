@@ -18,10 +18,12 @@ const Itemproduct = ({product}) => {
                                         <span className="card-text">{product.price}</span>
                                         {/* <button>Thêm vào giỏ hàng</button> */}
                                         <div style={{margin:'10px 0px', width: '105%'}}>
-                                            {/* <Link> */}
+                                            <Link to={`/product/${product.id}/0/0`}>
                                                 <p className="btn btn-primary col-6">Xem thêm</p>
-                                            {/* </Link> */}
-                                            <p className="btn btn-primary col-6">So sánh</p>
+                                            </Link>
+                                            <Link to={`/compare/${product.id}/0/0`}>
+                                                <p className="btn btn-primary col-6">So sánh</p>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

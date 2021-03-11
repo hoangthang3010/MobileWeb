@@ -104,8 +104,9 @@ export default function Product() {
   const onHandleDisShowDrop = () => {
     
   }
-  const onHandleDisShowDrop1 = () => {
+  const onHandleDisShowDrop1 = (index) => {
     setId2()
+    // setShowDrop(index)
   }
   const onHandleDisShowDrop2 = () => {
     setId2()
@@ -139,7 +140,7 @@ export default function Product() {
                     className="btn product__drop__item  dropright" 
                     style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
                     onMouseEnter={() => onHandleShowDrop(index)}
-                    onMouseLeave={() => onHandleDisShowDrop()}
+                    onMouseLeave={() => onHandleDisShowDrop(index)}
                   >
                     <span>{item.title} </span>
                     {
@@ -154,7 +155,7 @@ export default function Product() {
         <div
               style= {{  
                         // border: '1px solid #eaedf3',
-                        border: `${showDrop >0 ? '1px solid black' : 'none'}`,
+                        border: `${showDrop >=0 ? '1px solid #F5F8FD' : 'none'}`,
                         // borderLeft: 'none',
                         // minHeight: `${listmenu.length * 50}px`,
                         backgroundColor:'white'
@@ -168,7 +169,7 @@ export default function Product() {
                       className="product__drop__right"
                       style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
                       onMouseEnter={() => onHandleShowDrop1(index)}
-                      onMouseLeave={() => onHandleDisShowDrop1()}
+                      onMouseLeave={() => onHandleDisShowDrop1(index)}
                   >
                       <span>{item.name}</span>
                   </div>
@@ -179,7 +180,7 @@ export default function Product() {
         </div>
         <div
               style= {{ 
-                        border: `${showDrop1 >0 ? '1px solid black' : 'none'}`, 
+                        border: `${showDrop1 >=0 ? '1px solid #F5F8FD' : 'none'}`, 
                         // border: '1px solid #eaedf3',
                         // borderLeft: 'none',
                         // minHeight: `${listmenu.length * 50}px`,

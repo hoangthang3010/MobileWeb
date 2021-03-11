@@ -1,0 +1,39 @@
+.compare{
+    width: 90%;
+    // border: 1px solid black;
+    margin: auto;
+    &__product{
+        margin: 50px auto;
+        // width: 70%;
+        // border: 1px solid black;
+        &__title{
+            text-align: center;
+        }
+        &__information{
+            width: 100%;
+            &__1{
+                text-align: center;
+            }
+            
+        }
+        input{
+            width: 100%;
+            border: 1px solid #d7d8da;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        img{
+            padding: 40px;
+            max-width: 100%;
+        }
+    }
+    &__information{
+        
+    }
+}
+.table{
+    font-size: 14px;
+}
+.table tr{
+    margin: 0px;
+}
