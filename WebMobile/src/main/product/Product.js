@@ -9,6 +9,14 @@ export default function Product() {
       drop: [
         {
           name: "iPhone",
+          type: [
+            {
+              ten: 'ip11',
+            },
+            {
+              ten: 'ip12'
+            }
+          ]
         },
         {
           name: "Samsung",
@@ -25,16 +33,16 @@ export default function Product() {
       title: "Đồng hồ thông minh",
       drop: [
         {
-          name: "iPhone",
+          name: "Apple Watch",
         },
         {
-          name: "Samsung",
+          name: "Samsung Watch",
         },
         {
-          name: "Xiaomi",
+          name: "Xiaomi Watch",
         },
         {
-          name: "Oppo"
+          name: "Oppo Watch"
         }
       ]
     },
@@ -42,16 +50,16 @@ export default function Product() {
       title: "Máy tính bảng",
       drop: [
         {
-          name: "iPhone",
+          name: "ho",
         },
         {
-          name: "Samsung",
+          name: "hu",
         },
         {
-          name: "Xiaomi",
+          name: "he",
         },
         {
-          name: "Oppo"
+          name: "hy"
         }
       ]
     },
@@ -59,10 +67,10 @@ export default function Product() {
       title: "Laptop - Pc",
       drop: [
         {
-          name: "iPhone",
+          name: "ha",
         },
         {
-          name: "Samsung",
+          name: "hi",
         }
       ]
     },
@@ -76,31 +84,59 @@ export default function Product() {
     },
   ]
   const [showDrop, setShowDrop] = useState('0')
+  const [showDrop1, setShowDrop1] = useState('0')
   const [id, setId] = useState()
   const [id1, setId1] = useState()
+  const [id2, setId2] = useState()
   const onHandleShowDrop = (index) =>{
     setShowDrop(index)
     setId(index)
+    setId1()
+    setId2()
   }
   const onHandleShowDrop1 = (index) =>{
-    setShowDrop(index)
+    setShowDrop1(index)
     setId1(index)
-  } 
+  }
+  const onHandleShowDrop2 = (index) =>{
+    setId2(index)
+  }
   const onHandleDisShowDrop = () => {
+    
+  }
+  const onHandleDisShowDrop1 = () => {
+    setId2()
+  }
+  const onHandleDisShowDrop2 = () => {
+    setId2()
     // setId()
   }
-  // console.log(listmenu[0].drop);
+  const onHandleDisShowDrop3 = () => {
+    setId()
+    setId1()
+    setId2()
+    // setShowDrop(0)
+    // setShowDrop1(0)
+  }
+  // console.log(id);
+  // console.log(id1);
+  // console.log(id2);
+  // console.log(showDrop);
+  console.log(showDrop1);
   return (
     <div className="product">
-      <div style={{display: 'flex', margin: '50px'}}>
-        <div className="product__drop dropright">
+      <div 
+          className="product__drop"
+          // style={{width: `${listmenu[showDrop].drop[showDrop1].type && listmenu[showDrop].drop[showDrop1].type * 200}px`}}
+          onMouseLeave={() => onHandleDisShowDrop3()}
+      >
+        <div style={{display: 'inline-grid', minWidth:'200px'}}>
           {
             listmenu && listmenu.map((item, index) => {
-              // console.log(item.drop);
               return (
                 <>
                   <div 
-                    className="product__drop__item" 
+                    className="btn product__drop__item  dropright" 
                     style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
                     onMouseEnter={() => onHandleShowDrop(index)}
                     onMouseLeave={() => onHandleDisShowDrop()}
@@ -115,22 +151,24 @@ export default function Product() {
             })
           }
         </div>
-        <div style = {{  
-                        display: 'inline-block', 
-                        border: '1px solid #eaedf3',
-                        minHeight: `${listmenu.length * 50}px`,
+        <div
+              style= {{  
+                        // border: '1px solid #eaedf3',
+                        border: `${showDrop >0 ? '1px solid black' : 'none'}`,
+                        // borderLeft: 'none',
+                        // minHeight: `${listmenu.length * 50}px`,
                         backgroundColor:'white'
-                      }}
+              }}
         >
           {
+            listmenu[showDrop].drop &&
             listmenu[showDrop].drop.map((item, index) => {
-              return(item.name && item.name !== '' ? (
+              return(item.name !== '' ? (
                   <div  
                       className="product__drop__right"
-                      // className="product__drop__item" 
                       style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
                       onMouseEnter={() => onHandleShowDrop1(index)}
-                      onMouseLeave={() => onHandleDisShowDrop()}
+                      onMouseLeave={() => onHandleDisShowDrop1()}
                   >
                       <span>{item.name}</span>
                   </div>
@@ -139,35 +177,36 @@ export default function Product() {
             })
           }
         </div>
+        <div
+              style= {{ 
+                        border: `${showDrop1 >0 ? '1px solid black' : 'none'}`, 
+                        // border: '1px solid #eaedf3',
+                        // borderLeft: 'none',
+                        // minHeight: `${listmenu.length * 50}px`,
+                        backgroundColor:'white'
+              }}
+        >
+          {
+            listmenu[showDrop].drop[showDrop1].type &&
+            listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
+              return(item.name !== '' ? (
+                  <div  
+                      className="product__drop__right1"
+                      style={{ backgroundColor: `${id2 == index ? '#F5F8FD' :''}`}}
+                      onMouseEnter={() => onHandleShowDrop2(index)}
+                      onMouseLeave={() => onHandleDisShowDrop2()}
+                  >
+                      <span>{item.ten}</span>
+                  </div>
+                ) : ''
+              )
+            })
+          }
         </div>
+      </div>
     </div>
   )
 }
-
-        
-        {/* {
-          listmenu.drop && listmenu.drop.map((item) =>{
-            return(
-              {
-                listmenu[showDrop].drop && 
-                listmenu[showDrop].drop !== '' ? 
-                (<div className="product__drop__right">
-                  {
-                    <div 
-                        className="btn product__drop__item" 
-                        style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
-                        onMouseEnter={() => onHandleShowDrop(index)}
-                        onMouseLeave={() => onHandleDisShowDrop()}
-                    >
-                        <span>{listmenu[showDrop].drop}</span>
-                      
-                    </div>
-                  }
-                </div>) : ''
-              }
-            )
-          }
-        } */}
 
                   {/* <div className="product__dropright__item" onClick={() => onHandleDrop(index)}>
                     <span>{item.title} </span>
