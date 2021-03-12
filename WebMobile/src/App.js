@@ -10,6 +10,9 @@ import Product from './main/product/Product';
 import ContextAPI from './components/contextapi/counterCart'
 import Compare from './components/compare/compare'
 import Personal from './main/personal/Personal'
+import BackToTop from 'react-back-to-top-button'
+import {UpCircleTwoTone} from '@ant-design/icons/'
+
 
 function App() {
   return (
@@ -28,7 +31,13 @@ function App() {
               <Route path='/:somestring' ></Route>
             </Switch>
           </Router>
-        
+          <BackToTop
+                showAt={100}
+                speed={1500}
+                easing="easeInOutQuint"
+              >
+                <UpCircleTwoTone style={{fontSize: '40px'}}/>
+              </BackToTop>
         <Footer/> 
     </ContextAPI>
   );

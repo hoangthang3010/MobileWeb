@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {CounterContext} from '../contextapi/counterCart';
+import {ShoppingCartOutlined} from '@ant-design/icons'
 
 
 import './navbar.scss';
@@ -36,7 +37,8 @@ export default function Navbar1(props) {
         </div>
         <Link to="/card" className="header__content__box1__addShoppingCart" style={{textDecoration : "none"}}>
           <button className="navbar__card">
-            <AddShoppingCartIcon/>
+            {/* <AddShoppingCartIcon/> */}
+            <ShoppingCartOutlined style={{fontSize: '22px', marginRight: '10px'}}/>
             Giỏ hàng ({amount})
           </button>
         </Link>

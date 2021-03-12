@@ -77,9 +77,12 @@ export default function Product() {
     {
       title: "Phụ kiện",
       drop: [
-        {
-          name: "",
-        }
+        // {
+        //   name: "",
+        // },
+        // {
+        //   name: "",
+        // }
       ]
     },
   ]
@@ -91,6 +94,7 @@ export default function Product() {
   const onHandleShowDrop = (index) =>{
     setShowDrop(index)
     setId(index)
+    setShowDrop1(index)
     setId1()
     setId2()
   }
@@ -99,6 +103,7 @@ export default function Product() {
     setId1(index)
   }
   const onHandleShowDrop2 = (index) =>{
+
     setId2(index)
   }
   const onHandleDisShowDrop = () => {
@@ -106,23 +111,17 @@ export default function Product() {
   }
   const onHandleDisShowDrop1 = (index) => {
     setId2()
-    // setShowDrop(index)
+    setShowDrop1(index)
   }
   const onHandleDisShowDrop2 = () => {
     setId2()
-    // setId()
   }
   const onHandleDisShowDrop3 = () => {
     setId()
     setId1()
     setId2()
-    // setShowDrop(0)
-    // setShowDrop1(0)
+    // setShowDrop1('1')
   }
-  // console.log(id);
-  // console.log(id1);
-  // console.log(id2);
-  // console.log(showDrop);
   console.log(showDrop1);
   return (
     <div className="product">
@@ -154,7 +153,6 @@ export default function Product() {
         </div>
         <div
               style= {{  
-                        // border: '1px solid #eaedf3',
                         border: `${showDrop >=0 ? '1px solid #F5F8FD' : 'none'}`,
                         // borderLeft: 'none',
                         // minHeight: `${listmenu.length * 50}px`,
@@ -172,6 +170,10 @@ export default function Product() {
                       onMouseLeave={() => onHandleDisShowDrop1(index)}
                   >
                       <span>{item.name}</span>
+                      {
+                        // console.log(item.type.length)
+                        // item.type.length > 1  ?  <a>&rsaquo;</a> : ''
+                      }
                   </div>
                 ) : ''
               )
@@ -188,20 +190,22 @@ export default function Product() {
               }}
         >
           {
-            listmenu[showDrop].drop[showDrop1].type &&
-            listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
-              return(item.name !== '' ? (
-                  <div  
-                      className="product__drop__right1"
-                      style={{ backgroundColor: `${id2 == index ? '#F5F8FD' :''}`}}
-                      onMouseEnter={() => onHandleShowDrop2(index)}
-                      onMouseLeave={() => onHandleDisShowDrop2()}
-                  >
-                      <span>{item.ten}</span>
-                  </div>
-                ) : ''
-              )
-            })
+            listmenu[showDrop].drop.length > 0 && listmenu.length > 0 ? (
+              listmenu[showDrop].drop[showDrop1].type  &&
+              listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
+                return(item.name !== '' ? (
+                    <div  
+                        className="product__drop__right1"
+                        style={{ backgroundColor: `${id2 == index ? '#F5F8FD' :''}`}}
+                        onMouseEnter={() => onHandleShowDrop2(index)}
+                        onMouseLeave={() => onHandleDisShowDrop2()}
+                    >
+                        <span>{item.ten}</span>
+                    </div>
+                  ) : ''
+                )
+              })
+             ) : ''
           }
         </div>
       </div>

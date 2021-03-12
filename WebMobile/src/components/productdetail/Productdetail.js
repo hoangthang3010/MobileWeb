@@ -56,7 +56,7 @@ const Productdetail = ({match}) => {
                         <div className="productD__top__center__capacity">
                             <h1>Chọn dung lượng sản phẩm</h1>
                                 <div className="productD__top__center__color__item card-group">
-                                    {   product &&
+                                    {   product.version &&
                                         product.version.map((element,index) => {
                                             return (
                                                 <>

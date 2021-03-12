@@ -55,7 +55,7 @@ const Compare = ({match})=>{
         <div className='compare'>
             <div className='compare__product'>
                 <div className='compare__product__title'>
-                    <span>So sánh điện thoại </span>
+                    <h1>So sánh điện thoại </h1>
                 </div>
                 <div style={{display: 'flex', marginTop: '30px'}}>
                     <div className='col-2'></div>
@@ -65,7 +65,12 @@ const Compare = ({match})=>{
                             placeholder = {`${product.title}`}
                         />
                         <img src={product.version && product.version[idVersion].type[idType].image}/>
-                        <span>{product.version && product.version[idVersion].type[idType].price}</span>
+                        <span>  {   product.version && 
+                                    `${product.version[idVersion].type[idType].price}`.slice(-9,-6) + '.' + 
+                                    `${product.version[idVersion].type[idType].price}`.slice(-6,-3) + '.' + 
+                                    `${product.version[idVersion].type[idType].price}`.slice(-3)
+                                } đ
+                        </span>
                     </div>
                     <div className='col-4 compare__product__information__2'>
                         <input  
@@ -78,14 +83,14 @@ const Compare = ({match})=>{
             <hr/>
             <div className='compare__product__information'>
                 <table className='table table-borderless table-hover'>
-                    <thead>Thông tin chi tiết</thead>
+                    <thead style={{fontSize: '20px', fontWeight: '600'}}>Thông tin chi tiết</thead>
                     <hr/>
                     <tbody>
                     {
                         listInformation && product.information && listInformation.map((item, index)  =>{
                             return(
                                 <tr className='row'>
-                                    <td className='col-2'>{listInformation[index].title}</td>
+                                    <td className='col-2' style={{fontWeight: 'bold'}}>{listInformation[index].title}</td>
                                     <td className='col-4'>{product.information[index].info}</td>
                                     <td className='col-4'>{product.information[index].info}</td>
                                 </tr>

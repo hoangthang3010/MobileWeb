@@ -34,6 +34,14 @@ const Cart = ()=>{
         })
         setProduct([...product1])
     }
+    const removeProduct = (i) =>{
+        product1.forEach((item,index) => {
+            if(i===index){
+                product1.splice(index, 1)
+            }
+        })
+        setProduct([...product1])
+    }
     console.log(product1);
     return(
         <>
@@ -62,6 +70,7 @@ const Cart = ()=>{
                                     {/* <Counter/> */}
                                     
                                     <div className='checkout__item__detail__count'>
+                                        <p onClick={() => removeProduct(index)}>Xóa khỏi giỏ hàng</p>
                                         <p  className='checkout__item__detail__count--change' onClick={() => countDown(index)}>-</p>
                                         <p  className='checkout__item__detail__count--num'>{product.count}</p>
                                         <p  className='checkout__item__detail__count--change' onClick={() => {countUp(index);}}>+</p>

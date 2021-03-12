@@ -8,11 +8,19 @@
         // border: 1px solid black;
         &__title{
             text-align: center;
+            h1{
+                font-size: large;
+            }
         }
         &__information{
             width: 100%;
             &__1{
                 text-align: center;
+                span{
+                    color: #E11B1E;
+                    font-size: large;
+                    font-weight: 500;
+                }
             }
             
         }
@@ -23,7 +31,7 @@
             padding: 10px;
         }
         img{
-            padding: 40px;
+            padding: 10px 10px;
             max-width: 100%;
         }
     }
@@ -36,4 +44,8 @@
 }
 .table tr{
     margin: 0px;
+}
+.table-borderless td{
+    line-height: 2 !important;
+    padding: 8px 5px!important;
 }
