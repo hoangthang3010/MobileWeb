@@ -8,7 +8,6 @@ const Cart = ()=>{
     const value = useContext(CounterContext)
     const [product1, setProduct] = value.product
     const [total, setTotal] = useState(0)
-    console.log(product1);
     useEffect(()=>{
         const getTotal = () => {
             const res = product1.reduce((prev,item) =>{
@@ -70,8 +69,24 @@ const Cart = ()=>{
                                     {/* <Counter/> */}
                                     
                                     <div className='checkout__item__detail__count'>
-                                        <p onClick={() => removeProduct(index)}>Xóa khỏi giỏ hàng</p>
-                                        <p  className='checkout__item__detail__count--change' onClick={() => countDown(index)}>-</p>
+                                        <CounterContext.Consumer>
+                                            {({removeProduct})  => 
+                                                    <p  className='checkout__item__detail__count--change'
+                                                        onClick={() => 
+                                                            {   
+                                                                removeProduct(index);
+                                                            }}
+                                                    >
+                                                        Xóa khỏi giỏ hàng
+                                                    </p>
+                                            }
+                                        </CounterContext.Consumer>
+                                        {/* <p onClick={() => removeProduct(index)}>Xóa khỏi giỏ hàng</p> */}
+                                        {
+                                            product1[index].count && product1[index].count !== 1 ? (
+                                                <p  className='checkout__item__detail__count--down' onClick={() => countDown(index)}>-</p>
+                                            ) : ''
+                                        }
                                         <p  className='checkout__item__detail__count--num'>{product.count}</p>
                                         <p  className='checkout__item__detail__count--change' onClick={() => {countUp(index);}}>+</p>
                                         

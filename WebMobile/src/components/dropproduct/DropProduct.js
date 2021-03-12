@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Product.scss'
+import './DropProduct.scss'
 
-export default function Product() {
+export default function DropProduct() {
   const listmenu = [
     {
       title: "Điện thoại di động",
@@ -20,18 +20,12 @@ export default function Product() {
         },
         {
           name: "Samsung",
-          type: [
-          ]
         },
         {
           name: "Xiaomi",
-          type: [
-          ]
         },
         {
-          name: "Oppo",
-          type: [
-          ]
+          name: "Oppo"
         }
       ]
     },
@@ -40,23 +34,15 @@ export default function Product() {
       drop: [
         {
           name: "Apple Watch",
-          type: [
-          ]
         },
         {
           name: "Samsung Watch",
-          type: [
-          ]
         },
         {
           name: "Xiaomi Watch",
-          type: [
-          ]
         },
         {
-          name: "Oppo Watch",
-          type: [
-          ]
+          name: "Oppo Watch"
         }
       ]
     },
@@ -65,23 +51,15 @@ export default function Product() {
       drop: [
         {
           name: "ho",
-          type: [
-          ]
         },
         {
           name: "hu",
-          type: [
-          ]
         },
         {
           name: "he",
-          type: [
-          ]
         },
         {
-          name: "hy",
-          type: [
-          ]
+          name: "hy"
         }
       ]
     },
@@ -90,45 +68,46 @@ export default function Product() {
       drop: [
         {
           name: "ha",
-          type: [
-          ]
         },
         {
           name: "hi",
-          type: [
-          ]
         }
       ]
     },
     {
       title: "Phụ kiện",
       drop: [
-        {
-          name:'',
-          type: [
-          ]
-        }
+        // {
+        //   name: "",
+        // },
+        // {
+        //   name: "",
+        // }
       ]
     },
   ]
-  const [showDrop, setShowDrop] = useState('')
-  const [showDrop1, setShowDrop1] = useState('')
+  const [showDrop, setShowDrop] = useState('0')
+  const [showDrop1, setShowDrop1] = useState('0')
   const [id, setId] = useState()
   const [id1, setId1] = useState()
   const [id2, setId2] = useState()
   const onHandleShowDrop = (index) =>{
     setShowDrop(index)
     setId(index)
+    setShowDrop1(index)
     setId1()
+    setId2()
   }
   const onHandleShowDrop1 = (index) =>{
     setShowDrop1(index)
     setId1(index)
   }
   const onHandleShowDrop2 = (index) =>{
+
     setId2(index)
   }
   const onHandleDisShowDrop = () => {
+    
   }
   const onHandleDisShowDrop1 = (index) => {
     setId2()
@@ -141,8 +120,9 @@ export default function Product() {
     setId()
     setId1()
     setId2()
-    setShowDrop1()
+    // setShowDrop1('1')
   }
+  console.log(showDrop1);
   return (
     <div className="product">
       <div 
@@ -179,36 +159,38 @@ export default function Product() {
                         backgroundColor:'white'
               }}
         >
-          { 
-            showDrop !== '' ? (
-              listmenu[showDrop].drop &&
-              listmenu[showDrop].drop.map((item, index) => {
-                return(item.name !== '' ? (
-                    <div  
-                        className="product__drop__right"
-                        style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
-                        onMouseEnter={() => onHandleShowDrop1(index)}
-                        onMouseLeave={() => onHandleDisShowDrop1(index)}
-                    >
+          {
+            listmenu[showDrop].drop &&
+            listmenu[showDrop].drop.map((item, index) => {
+              return(item.name !== '' ? (
+                  <div  
+                      className="product__drop__right"
+                      style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
+                      onMouseEnter={() => onHandleShowDrop1(index)}
+                      onMouseLeave={() => onHandleDisShowDrop1(index)}
+                  >
                       <span>{item.name}</span>
                       {
-                        listmenu[showDrop].drop[index].type.length > 1 ? <a>&rsaquo;</a> : ''
+                        // console.log(item.type.length)
+                        // item.type.length > 1  ?  <a>&rsaquo;</a> : ''
                       }
-                    </div>
-                  ) : ''
-                )
-              })
-            ) : ''
+                  </div>
+                ) : ''
+              )
+            })
           }
         </div>
         <div
               style= {{ 
                         border: `${showDrop1 >=0 ? '1px solid #F5F8FD' : 'none'}`, 
+                        // border: '1px solid #eaedf3',
+                        // borderLeft: 'none',
+                        // minHeight: `${listmenu.length * 50}px`,
                         backgroundColor:'white'
               }}
         >
           {
-            showDrop1 !== '' && listmenu[showDrop].drop[showDrop1] ? (
+            listmenu[showDrop].drop.length > 0 && listmenu.length > 0 ? (
               listmenu[showDrop].drop[showDrop1].type  &&
               listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
                 return(item.name !== '' ? (
@@ -223,7 +205,7 @@ export default function Product() {
                   ) : ''
                 )
               })
-             ) :  ''
+             ) : ''
           }
         </div>
       </div>

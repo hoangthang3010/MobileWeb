@@ -107,13 +107,28 @@ const Productdetail = ({match}) => {
                                     <div>
                                         <Link to='/card'>
                                             <button className='col-6'
-                                                onClick={() => {buyNow(product.version[idVersion].type[idType],product.title,product.version[idVersion].capacity, product.version[idVersion].id1, param.id);}}
+                                                onClick={() => 
+                                                    {    
+                                                        buyNow(
+                                                                product.version[idVersion].type[idType],product.title,
+                                                                product.version[idVersion].capacity, 
+                                                                product.version[idVersion].id1, 
+                                                                param.id
+                                                        );
+                                                    }}
                                             >
                                                 MUA NGAY
                                             </button>
                                         </Link>
                                         <button className='col-6'
-                                            onClick={() => {addToCart(product.version[idVersion].type[idType],product.title,product.version[idVersion].capacity, product.version[idVersion].id1, param.id);}}
+                                            onClick={() => 
+                                                {   
+                                                    addToCart(
+                                                                product.version[idVersion].type[idType],
+                                                                product.title,product.version[idVersion].capacity, 
+                                                                product.version[idVersion].id1, param.id
+                                                    );
+                                                }}
                                         >
                                             Thêm vào giỏ hàng
                                         </button>

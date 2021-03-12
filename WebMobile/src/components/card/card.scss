@@ -53,6 +53,7 @@
                 float: right;
                 justify-self: self-end;
                 align-self: center;
+                
                 p{
                     color: black;
                     padding: 10px 15px;
@@ -64,9 +65,18 @@
                 &--num{
                     border-top: 1px solid #e1e4e9;
                     border-bottom: 1px solid #e1e4e9;
+                    // border-left: 1px solid #e1e4e9;
+                    // border: 1px solid #e1e4e9;
+                    // border-right: none;
                 }
                 &--change{
                     border: 1px solid #e1e4e9;
+                }
+                &--down{
+                    // border-top: 1px solid #e1e4e9;
+                    // border-bottom: 1px solid #e1e4e9;
+                    border: 1px solid #e1e4e9;
+                    border-left: none;
                 }
             }
         }

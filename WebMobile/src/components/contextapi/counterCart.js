@@ -8,14 +8,11 @@ export  const CounterContext = createContext();
 export default function ContextAPI(props){
   const [amount, setAmount] = useState(0)
   const [product, setProduct] = useState([])
-  // const [count, setCount] = useState(false)
-
-  // const buyNow = (product1, name, version) => {
-  //   var detail1 = Object.assign(product1,{name},{version});
-  //   // setName(name => name.concat({name:`${name}`}))
-  //   setProduct(product.concat(detail1))
-  //   setAmount(amount+1)
-  // }
+  const removeProduct = (index) => {
+      product.splice(index, 1)
+      setProduct([...product])
+      setAmount(amount-1)
+  }
   const buyNow = (product1, name, capacity, id1, id) => {
     let count = 0
     let detail1 = Object.assign(product1,{name},{capacity},{id}, {id1})
@@ -86,6 +83,7 @@ export default function ContextAPI(props){
     amount: [amount, setAmount],
     product: [product, setProduct],
     buyNow: buyNow,
+    removeProduct: removeProduct,
     addToCart: addToCart
   }
   return (
