@@ -4,6 +4,7 @@ import './card.scss'
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import { Link } from 'react-router-dom';
 
+
 const Cart = ()=>{
     const value = useContext(CounterContext)
     const [product1, setProduct] = value.product

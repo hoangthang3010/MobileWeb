@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DropProduct.scss'
 
-export default function DropProduct() {
+export default function Product() {
   const listmenu = [
     {
       title: "Điện thoại di động",
@@ -20,12 +20,18 @@ export default function DropProduct() {
         },
         {
           name: "Samsung",
+          type: [
+          ]
         },
         {
           name: "Xiaomi",
+          type: [
+          ]
         },
         {
-          name: "Oppo"
+          name: "Oppo",
+          type: [
+          ]
         }
       ]
     },
@@ -34,15 +40,23 @@ export default function DropProduct() {
       drop: [
         {
           name: "Apple Watch",
+          type: [
+          ]
         },
         {
           name: "Samsung Watch",
+          type: [
+          ]
         },
         {
           name: "Xiaomi Watch",
+          type: [
+          ]
         },
         {
-          name: "Oppo Watch"
+          name: "Oppo Watch",
+          type: [
+          ]
         }
       ]
     },
@@ -51,15 +65,23 @@ export default function DropProduct() {
       drop: [
         {
           name: "ho",
+          type: [
+          ]
         },
         {
           name: "hu",
+          type: [
+          ]
         },
         {
           name: "he",
+          type: [
+          ]
         },
         {
-          name: "hy"
+          name: "hy",
+          type: [
+          ]
         }
       ]
     },
@@ -68,46 +90,46 @@ export default function DropProduct() {
       drop: [
         {
           name: "ha",
+          type: [
+          ]
         },
         {
           name: "hi",
+          type: [
+          ]
         }
       ]
     },
     {
       title: "Phụ kiện",
       drop: [
-        // {
-        //   name: "",
-        // },
-        // {
-        //   name: "",
-        // }
+        {
+          name:'',
+          type: [
+          ]
+        }
       ]
     },
   ]
-  const [showDrop, setShowDrop] = useState('0')
-  const [showDrop1, setShowDrop1] = useState('0')
+  const [showDrop, setShowDrop] = useState('')
+  const [showDrop1, setShowDrop1] = useState('')
   const [id, setId] = useState()
   const [id1, setId1] = useState()
   const [id2, setId2] = useState()
   const onHandleShowDrop = (index) =>{
     setShowDrop(index)
     setId(index)
-    setShowDrop1(index)
     setId1()
-    setId2()
+    setShowDrop1('')
   }
   const onHandleShowDrop1 = (index) =>{
     setShowDrop1(index)
     setId1(index)
   }
   const onHandleShowDrop2 = (index) =>{
-
     setId2(index)
   }
   const onHandleDisShowDrop = () => {
-    
   }
   const onHandleDisShowDrop1 = (index) => {
     setId2()
@@ -120,8 +142,10 @@ export default function DropProduct() {
     setId()
     setId1()
     setId2()
-    // setShowDrop1('1')
+    setShowDrop('')
+    setShowDrop1('')
   }
+  console.log(showDrop);
   console.log(showDrop1);
   return (
     <div className="product">
@@ -137,7 +161,7 @@ export default function DropProduct() {
                 <>
                   <div 
                     className="btn product__drop__item  dropright" 
-                    style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
+                    style={{ backgroundColor: `${id == index ? '#F8F4F4' :''}`, zIndex: '1'}}
                     onMouseEnter={() => onHandleShowDrop(index)}
                     onMouseLeave={() => onHandleDisShowDrop(index)}
                   >
@@ -153,50 +177,48 @@ export default function DropProduct() {
         </div>
         <div
               style= {{  
-                        border: `${showDrop >=0 ? '1px solid #F5F8FD' : 'none'}`,
-                        // borderLeft: 'none',
-                        // minHeight: `${listmenu.length * 50}px`,
-                        backgroundColor:'white'
+                backgroundColor:'white',
+                boxShadow: `${showDrop !=='' ?  '-1px 0px 3px #888888' : 'none'}`,
+                zIndex: '2'
               }}
         >
-          {
-            listmenu[showDrop].drop &&
-            listmenu[showDrop].drop.map((item, index) => {
-              return(item.name !== '' ? (
-                  <div  
-                      className="product__drop__right"
-                      style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
-                      onMouseEnter={() => onHandleShowDrop1(index)}
-                      onMouseLeave={() => onHandleDisShowDrop1(index)}
-                  >
+          { 
+            showDrop !== '' ? (
+              listmenu[showDrop].drop &&
+              listmenu[showDrop].drop.map((item, index) => {
+                return(item.name !== '' ? (
+                    <div  
+                        className="product__drop__right"
+                        style={{ backgroundColor: `${id1 == index ? '#F8F4F4' :''}`}}
+                        onMouseEnter={() => onHandleShowDrop1(index)}
+                        onMouseLeave={() => onHandleDisShowDrop1(index)}
+                    >
                       <span>{item.name}</span>
                       {
-                        // console.log(item.type.length)
-                        // item.type.length > 1  ?  <a>&rsaquo;</a> : ''
+                        listmenu[showDrop].drop[index].type.length > 1 ? <a>&rsaquo;</a> : ''
                       }
-                  </div>
-                ) : ''
-              )
-            })
+                    </div>
+                  ) : ''
+                )
+              })
+            ) : ''
           }
         </div>
         <div
               style= {{ 
-                        border: `${showDrop1 >=0 ? '1px solid #F5F8FD' : 'none'}`, 
-                        // border: '1px solid #eaedf3',
-                        // borderLeft: 'none',
-                        // minHeight: `${listmenu.length * 50}px`,
-                        backgroundColor:'white'
+                backgroundColor:'white',
+                boxShadow: `${showDrop1 !=='' ?  '-1px 0px 3px #888888' : 'none'}`,
+                zIndex: '3'
               }}
         >
           {
-            listmenu[showDrop].drop.length > 0 && listmenu.length > 0 ? (
+            showDrop1 !== '' && listmenu[showDrop].drop[showDrop1] ? (
               listmenu[showDrop].drop[showDrop1].type  &&
               listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
                 return(item.name !== '' ? (
                     <div  
                         className="product__drop__right1"
-                        style={{ backgroundColor: `${id2 == index ? '#F5F8FD' :''}`}}
+                        style={{ backgroundColor: `${id2 == index ? '#F8F4F4' :''}`}}
                         onMouseEnter={() => onHandleShowDrop2(index)}
                         onMouseLeave={() => onHandleDisShowDrop2()}
                     >
@@ -205,7 +227,7 @@ export default function DropProduct() {
                   ) : ''
                 )
               })
-             ) : ''
+             ) :  ''
           }
         </div>
       </div>

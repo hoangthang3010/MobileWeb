@@ -6,8 +6,6 @@ import {CounterContext} from '../contextapi/counterCart'
 import { Link } from 'react-router-dom';
 
 const Productdetail = ({match}) => {
-    // console.log(match.params.id);
-    // console.log(match.params.id1);
     const param = useParams()
     const [product, setProduct] = useState('')
     const [showRate, setShowRate] = useState(false)
@@ -16,9 +14,7 @@ const Productdetail = ({match}) => {
     const fetchProductApi = async () => {
         const response = await productApi.fetchProductApiById(param.id)
         setProduct(response)
-      } 
-    //   console.log(product.version[idVersion].type[idType].price);
-    //   console.log(product);
+      }
     useEffect(() => {
         fetchProductApi()
     }, [])
@@ -31,9 +27,6 @@ const Productdetail = ({match}) => {
     const handleVersion = (index) =>{
         setIdVersion(index)
         setIdType(0)
-        // setBorder(index)
-        // setId1(index)
-        
     }
     const handleType = (index) =>{
         setIdType(index)
@@ -59,20 +52,16 @@ const Productdetail = ({match}) => {
                                     {   product.version &&
                                         product.version.map((element,index) => {
                                             return (
-                                                <>
-                                                {/* style={{border: `1px solid ${border && (border === 1 ? '#e1e4e9' : 'red')}`}} */}
-                                                {/* style={{border: `1px solid ${id1 == index ? 'red' : '#e1e4e9'}`}} */}
-                                                    <div className="col-4">
-                                                        <div    
-                                                            key={index} 
-                                                            style={{border: `1px solid ${idVersion == index ? 'red' : '#e1e4e9'}`, padding: '10px', margin: '5px -10px'}} 
-                                                            onClick={()=>handleVersion(index)}
-                                                        >
-                                                            <h1>{element.capacity}</h1>
-                                                            <span>{element.price}đ</span>
-                                                        </div>
+                                                <div className="col-4">
+                                                    <div    
+                                                        key={index} 
+                                                        style={{border: `1px solid ${idVersion == index ? 'red' : '#e1e4e9'}`, padding: '10px', margin: '5px -10px'}} 
+                                                        onClick={()=>handleVersion(index)}
+                                                    >
+                                                        <h1>{element.capacity}</h1>
+                                                        <span>{element.price}đ</span>
                                                     </div>
-                                                </>
+                                                </div>
                                             ) 
                                         })
                                     }
@@ -84,7 +73,6 @@ const Productdetail = ({match}) => {
                                     {   product.version &&
                                         product.version[idVersion].type.map((element,index) => {
                                             return (
-                                                <>
                                                 <div className="col-4">
                                                     <div    
                                                         key={index} 
@@ -95,7 +83,6 @@ const Productdetail = ({match}) => {
                                                         <span>{`${element.price}`.slice(-9,-6) + '.' + `${element.price}`.slice(-6,-3) + '.' + `${element.price}`.slice(-3)}đ</span>
                                                     </div>
                                                 </div>
-                                                </>
                                             ) 
                                         })
                                     }
@@ -110,10 +97,10 @@ const Productdetail = ({match}) => {
                                                 onClick={() => 
                                                     {    
                                                         buyNow(
-                                                                product.version[idVersion].type[idType],product.title,
-                                                                product.version[idVersion].capacity, 
-                                                                product.version[idVersion].id1, 
-                                                                param.id
+                                                            product.version[idVersion].type[idType],product.title,
+                                                            product.version[idVersion].capacity, 
+                                                            product.version[idVersion].id1, 
+                                                            param.id
                                                         );
                                                     }}
                                             >
@@ -124,9 +111,9 @@ const Productdetail = ({match}) => {
                                             onClick={() => 
                                                 {   
                                                     addToCart(
-                                                                product.version[idVersion].type[idType],
-                                                                product.title,product.version[idVersion].capacity, 
-                                                                product.version[idVersion].id1, param.id
+                                                        product.version[idVersion].type[idType],
+                                                        product.title,product.version[idVersion].capacity, 
+                                                        product.version[idVersion].id1, param.id
                                                     );
                                                 }}
                                         >
@@ -142,7 +129,17 @@ const Productdetail = ({match}) => {
                             <div className="productD__top__right__specifications__title">
                                 <span>Thông số kĩ thuật</span>
                             </div>
-                            <div>hi</div>
+                            <div  className="productD__top__right__specifications__body">
+                                {
+                                    
+                                    product.information &&
+                                    product.information.map((item, index) => {
+                                        return (
+                                            <p>{product.information[index].info}</p>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                         <div className="productD__top__right__top">
 

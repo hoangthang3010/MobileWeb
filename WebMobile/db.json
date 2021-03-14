@@ -59,10 +59,6 @@
           "info": "4 GB"
         },
         {
-          "name": "rom",
-          "info": "64 GB"
-        },
-        {
           "name": "pin",
           "info": "Li-Ion, sạc nhanh 20W, sạc không dây 15W, USB Power Delivery 2.0"
         }
@@ -187,12 +183,12 @@
       "category": "1",
       "information": [
         {
-          "name": "screen",
-          "info": "6.1 inches"
-        },
-        {
           "name": "size",
           "info": "146.7 x 71.5 x 7.4 mm"
+        },
+        {
+          "name": "screen",
+          "info": "6.1 inches"
         },
         {
           "name": "aftercamera",
@@ -214,11 +210,6 @@
           "name": "ram",
           "info": "6 GB"
         },
-        {
-          "name": "rom",
-          "info": "128 GB"
-        }
-        ,
         {
           "name": "pin",
           "info": "Li-Ion, sạc nhanh 20W, sạc không dây 15W, USB Power Delivery 2.0"

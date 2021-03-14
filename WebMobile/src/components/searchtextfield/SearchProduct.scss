@@ -1,0 +1,11 @@
+.searchproduct{
+    &__nameproduct{
+        &__version{
+            &__type{
+                &:hover{
+                    background-color: #FAFAFA;
+                }
+            }
+        }
+    }
+}

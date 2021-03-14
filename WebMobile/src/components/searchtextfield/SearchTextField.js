@@ -1,38 +1,138 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import React, { useEffect, useState, useRef } from 'react';
+import productApi from '../../api/productApi'
+import './SearchProduct.scss'
 
+export default function CustomizedInputBase(props) {
+  const [product, setProduct] = useState('')
+  const [value, setValue] = useState({text : ''});
+  const [word , setWord] =useState(null);
+  const [backgroundItem, setBackgroundItem] = useState('')
+  const [listProduct , setListProduct] = useState([]);
+  const fetchProductApi = async () => {
+    const response = await productApi.fetchProductApi('product')
+    setProduct(response)
+  }
+  useEffect(() => {
+      fetchProductApi()
+  },[] )
+  const typingTimeoutRef = useRef(null);
+  const onHandleChangeWordSearch = (e) =>{
+    // if(!onSearch) return;
+    const value = e.target.value;
+    if(typingTimeoutRef.current){
+      clearTimeout(typingTimeoutRef.current);
+    }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
-    width: 400,
-    height:'36px',
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-}));
-
-export default function CustomizedInputBase() {
-  const classes = useStyles();
-
+    typingTimeoutRef.current = setTimeout(() =>{
+      // props.onSearch(value);
+      onSearch(value);
+      props.onValue(value)
+    },5e2);
+    console.log(value)
+  }
+  const onSearch = async (word) =>{
+    setWord(word);
+    if(word){
+      let listProduct = product;
+      let listProduct2 = null;
+      listProduct = await product.filter((mem)=>{
+          return mem.id.toLowerCase().indexOf(word) !== -1;
+      });
+      listProduct2 = await  product.filter((mem)=>{
+          return mem.title.toLowerCase().indexOf(word) !== -1;
+      });
+      listProduct = await [...listProduct , ...listProduct2];
+      listProduct = await listProduct.reduce((unique, o) => {
+          if(!unique.some(obj => obj.id === o.id )) {
+              unique.push(o);
+          }
+          return unique;
+      },[]);
+      setListProduct(listProduct)
+      // console.log(listProduct)
+    }
+  }
+  const onClickProduct = (index, index1, index2) => {
+    setWord(null)
+    props.onClickProduct(index, index1, index2)
+    setValue({text: product[index].title})
+  }
+  const onHandleName = e =>{
+    setValue({text : e.target.value})
+}
   return (
-    <Paper component="form" className={classes.root}>
-      <InputBase
-        className={classes.input}
-        placeholder="Tìm kiềm sản phẩm..."
-        inputProps={{ 'aria-label': 'tìm kiếm' }}
+    <div className="searchproduct" onChange = {onHandleChangeWordSearch}>
+      <input 
+        name="keyword" 
+        type="text"  
+        placeholder="Nhập từ khóa..."
+        autoComplete='off'
+        value={value.text}
+        onChange={onHandleName}
       />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+      { 
+        listProduct &&
+        listProduct.length !== 0 && word ? (
+        <div 
+            className= 'searchproduct__nameproduct'
+            style = {{ 
+                      height:'300px', 
+                      overflowY: 'scroll',
+                      border: '1px solid black',
+                      borderRadius: '4px',
+                      position: 'absolute',
+                      zIndex: '100',
+                      backgroundColor: 'white'
+                     }}>
+          {
+            listProduct.map((item,index) => {
+              // console.log(item.version);
+              return(
+                <div className= 'searchproduct__nameproduct__version'>
+                  { 
+                    item.version &&
+                    item.version.map((item1,index1) => {
+                      return(
+                        <>
+                        {
+                          item1.type &&
+                          item1.type.map((item2, index2) => {
+                            return(
+                              <div 
+                                  className= 'searchproduct__nameproduct__version__type'
+                                  style = {{ 
+                                            display: 'flex', 
+                                            borderBottom: '1px solid #D7D8DA',
+                                            padding: '5px'
+                                          }}
+                                  onClick={() => onClickProduct(index, index1, index2, listProduct)}
+                              >
+                                <img className='col-2' src ={item2.image}
+                                    style = {{ maxWidth: '30%'}}
+                                />
+                                <div   
+                                    className='col-10' 
+                                    // style = {{ display: 'flex'}}
+                                >
+                                  {/* &ensp;|&ensp; */}
+                                  <p>{item.title}</p>
+                                  <p>{item1.capacity}</p>
+                                  <p>{item2.color}</p>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+                        </>
+                      )
+                    })
+                  }
+                </div>
+              )
+            })
+          }
+        </div> ) : ''
+      }
+    </div>
   );
 }
