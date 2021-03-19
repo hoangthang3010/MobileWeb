@@ -3,31 +3,41 @@ import { Link } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.css';
 
 const Itemproduct = ({product}) => {
+    // console.log(product[0].type);
     return(
         <div className='card-group'>
             { 
-               product && product.map((product) => {
+               product && product.map((item, key) => {
                     return (
-                            <div className="col-3">
-                                <div className="card text-center">
-                                    <img className="card-img-top" src={product.image} alt="Card image cap"/>
-                                    <div className="card-body">
-                                        <Link className='itemproduct__detail__title' to={`/product/${product.id}/0/0`}>
-                                            <h5 className="card-title">{product.title}</h5>
-                                        </Link>
-                                        <span className="card-text">{product.price}</span>
-                                        {/* <button>Thêm vào giỏ hàng</button> */}
-                                        <div style={{margin:'10px 0px', width: '105%'}}>
-                                            <Link to={`/product/${product.id}/0/0`}>
-                                                <p className="btn btn-primary col-6">Xem thêm</p>
-                                            </Link>
-                                            <Link to={`/compare/${product.id}/0/0`}>
-                                                <p className="btn btn-primary col-6">So sánh</p>
-                                            </Link>
+                        <>
+                        {
+                            item.items.map((product, index) => {
+                                // console.log(product);
+                                return(
+                                    <div className="col-3" key={index}>
+                                        <div className="card text-center">
+                                            <img className="card-img-top" src={product.image} alt="Card image cap"/>
+                                            <div className="card-body">
+                                                <Link className='itemproduct__detail__title' to={`/purchase/${key+1}/${product.id}/0/0`}>
+                                                    <h5 className="card-title">{product.title}</h5>
+                                                </Link>
+                                                <span className="card-text">{product.price}</span>
+                                                {/* <button>Thêm vào giỏ hàng</button> */}
+                                                <div style={{margin:'10px 0px'}}>
+                                                    <Link to={`/purchase/${key+1}/${product.id}/0/0`}>
+                                                        <p className="btn btn-primary col-6">Xem thêm</p>
+                                                    </Link>
+                                                    <Link to={`/compare/${key+1}/${product.id}/0/0`}>
+                                                        <p className="btn btn-primary col-6">So sánh</p>
+                                                    </Link>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                        </div>
+                                )
+                            })
+                        }
+                        </>
                         // <div className="itemproduct__detail">
                         //     <img className="image" src={product.image} alt={product.title} key={index}/>
                         //     <Link className='itemproduct__detail__title' to={`/productdetail/${index}`}>
