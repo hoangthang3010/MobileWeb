@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import './DropProduct.scss'
+import { Link } from 'react-router-dom';
+
 
 export default function Product() {
   const listmenu = [
     {
       title: "Điện thoại di động",
-      // drop: "hi"
+      name: "mobile",
       drop: [
         {
-          name: "iPhone",
+          name: "iphone",
+          title: "iPhone",
           type: [
             {
               ten: 'ip11',
@@ -19,17 +22,20 @@ export default function Product() {
           ]
         },
         {
-          name: "Samsung",
+          name: "samsung",
+          title: "Samsung",
           type: [
           ]
         },
         {
-          name: "Xiaomi",
+          name: "xiaomi",
+          title: "Xiaomi",
           type: [
           ]
         },
         {
-          name: "Oppo",
+          name: "oppo",
+          title: "Oppo",
           type: [
           ]
         }
@@ -37,19 +43,23 @@ export default function Product() {
     },
     {
       title: "Đồng hồ thông minh",
+      name: "smartwatch",
       drop: [
         {
-          name: "Apple Watch",
+          name: "applewatch",
+          title: "Apple Watch",
           type: [
           ]
         },
         {
           name: "Samsung Watch",
+          title: "Samsung Watch",
           type: [
           ]
         },
         {
           name: "Xiaomi Watch",
+          title: "Xiaomi Watch",
           type: [
           ]
         },
@@ -62,24 +72,29 @@ export default function Product() {
     },
     {
       title: "Máy tính bảng",
+      name: "tablet",
       drop: [
         {
           name: "ho",
+          title:"ho",
           type: [
           ]
         },
         {
           name: "hu",
+          title:"ho",
           type: [
           ]
         },
         {
           name: "he",
+          title:"ho",
           type: [
           ]
         },
         {
           name: "hy",
+          title:"ho",
           type: [
           ]
         }
@@ -87,14 +102,17 @@ export default function Product() {
     },
     {
       title: "Laptop - Pc",
+      name: "laptop",
       drop: [
         {
           name: "ha",
+          title:"ho",
           type: [
           ]
         },
         {
           name: "hi",
+          title:"ho",
           type: [
           ]
         }
@@ -102,6 +120,7 @@ export default function Product() {
     },
     {
       title: "Phụ kiện",
+      name: "gear",
       drop: [
         {
           name:'',
@@ -145,12 +164,10 @@ export default function Product() {
     setShowDrop('')
     setShowDrop1('')
   }
-  console.log(showDrop);
-  console.log(showDrop1);
   return (
-    <div className="product">
+    <div className="dropproduct">
       <div 
-          className="product__drop"
+          className="dropproduct__drop"
           // style={{width: `${listmenu[showDrop].drop[showDrop1].type && listmenu[showDrop].drop[showDrop1].type * 200}px`}}
           onMouseLeave={() => onHandleDisShowDrop3()}
       >
@@ -158,19 +175,20 @@ export default function Product() {
           {
             listmenu && listmenu.map((item, index) => {
               return (
-                <>
-                  <div 
-                    className="btn product__drop__item  dropright" 
-                    style={{ backgroundColor: `${id == index ? '#F8F4F4' :''}`, zIndex: '1'}}
-                    onMouseEnter={() => onHandleShowDrop(index)}
+                <Link className="btn dropproduct__drop__item  dropright"  to = {'/product/' + `${item.name}`}
+                      style={{ backgroundColor: `${id === index ? '#F8F4F4' :''}`, zIndex: '1'}}
+                      onMouseEnter={() => onHandleShowDrop(index)}
                     onMouseLeave={() => onHandleDisShowDrop(index)}
+                >
+                  <div 
+                    
                   >
                     <span>{item.title} </span>
                     {
-                      item.drop.length > 1  ?  <a>&rsaquo;</a> : ''
+                      item.drop.length > 1  ?  <p>&rsaquo;</p> : ''
                     }
                   </div>
-                </>
+                </Link>
               )
             })
           }
@@ -187,17 +205,20 @@ export default function Product() {
               listmenu[showDrop].drop &&
               listmenu[showDrop].drop.map((item, index) => {
                 return(item.name !== '' ? (
-                    <div  
-                        className="product__drop__right"
-                        style={{ backgroundColor: `${id1 == index ? '#F8F4F4' :''}`}}
-                        onMouseEnter={() => onHandleShowDrop1(index)}
-                        onMouseLeave={() => onHandleDisShowDrop1(index)}
-                    >
-                      <span>{item.name}</span>
-                      {
-                        listmenu[showDrop].drop[index].type.length > 1 ? <a>&rsaquo;</a> : ''
-                      }
-                    </div>
+                    <Link to = {'/product/' + `${listmenu[showDrop].name}` + '/' + `${item.name}`}>
+                      <div  
+                          className="dropproduct__drop__right"
+                          style={{ backgroundColor: `${id1 === index ? '#F8F4F4' :''}`}}
+                          onMouseEnter={() => onHandleShowDrop1(index)}
+                          onMouseLeave={() => onHandleDisShowDrop1(index)}
+                          // onClick={() => onHandlerop1(index)}
+                      >
+                        <span>{item.title}</span>
+                        {
+                          listmenu[showDrop].drop[index].type.length > 1 ? <a>&rsaquo;</a> : ''
+                        }
+                      </div>
+                    </Link>
                   ) : ''
                 )
               })
@@ -216,14 +237,18 @@ export default function Product() {
               listmenu[showDrop].drop[showDrop1].type  &&
               listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
                 return(item.name !== '' ? (
-                    <div  
-                        className="product__drop__right1"
-                        style={{ backgroundColor: `${id2 == index ? '#F8F4F4' :''}`}}
-                        onMouseEnter={() => onHandleShowDrop2(index)}
-                        onMouseLeave={() => onHandleDisShowDrop2()}
-                    >
-                        <span>{item.ten}</span>
-                    </div>
+                    <Link to = {'/product/' + `${listmenu[showDrop].name}` +
+                                '/' + `${listmenu[showDrop].drop[showDrop1].name}` + 
+                                '/' + `${item.ten}`}>
+                      <div  
+                          className="dropproduct__drop__right1"
+                          style={{ backgroundColor: `${id2 == index ? '#F8F4F4' :''}`}}
+                          onMouseEnter={() => onHandleShowDrop2(index)}
+                          onMouseLeave={() => onHandleDisShowDrop2()}
+                      >
+                          <span>{item.ten}</span>
+                      </div>
+                    </Link>
                   ) : ''
                 )
               })

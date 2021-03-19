@@ -1,80 +1,76 @@
-import React,{useContext, useEffect, useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import productApi from '../../api/productApi'
 import {useParams} from 'react-router-dom'
 import './compare.scss'
-import { Link } from 'react-router-dom';
 import SearchTextField from '../searchtextfield/SearchTextField'
 import iconcompare from  '../../picture/iconcompare.jpg'
 
 const Compare = ({match})=>{
-    const listInformation = [
-        {
-            title: "Kích thước"
-        },
-        {
-            title: "Màn hình"
-        },
-        {
-            title: "Cam sau"
-        },
-        {
-            title: "Cam trước"
-        },
-        {
-            title: "Hệ điều hành"
-        },
-        {
-            title: "CPU"
-        },
-        {
-            title: "Ram"
-        },
-        {
-            title: "Dung lượng pin"
-        },
-        {
-            title: "Bộ nhớ"
-        }
-    ]
+    // const listInformation = [
+    //     {
+    //         title: "Kích thước"
+    //     },
+    //     {
+    //         title: "Màn hình"
+    //     },
+    //     {
+    //         title: "Cam sau"
+    //     },
+    //     {
+    //         title: "Cam trước"
+    //     },
+    //     {
+    //         title: "Hệ điều hành"
+    //     },
+    //     {
+    //         title: "CPU"
+    //     },
+    //     {
+    //         title: "Ram"
+    //     },
+    //     {
+    //         title: "Dung lượng pin"
+    //     },
+    //     {
+    //         title: "Bộ nhớ"
+    //     }
+    // ]
     const param = useParams()
     const [product, setProduct] = useState('')
     const [productCompare, setProductCompare] = useState('')
-    const [idVersion, setIdVersion] = useState(param.id1)
-    const [idType, setIdType] = useState(param.id2)
+    const [idItems] = useState(param.id-1)
+    const [idVersion] = useState(param.id1)
+    const [idType] = useState(param.id2)
     const [idVersion2, setIdVersion2] = useState('')
     const [idType2, setIdType2] = useState('')
     const [idCompare, setIdCompare] = useState('')
-    const [listProduct, setListProduct] = useState([])
+    const [listProduct, setListProduct] = useState('')
     const [value, setValue] = useState('')
     const fetchProductApi = async () => {
-        const response = await productApi.fetchProductApiById(param.id)
+        const response = await productApi.fetchProductApiById(param.items)
         setProduct(response)
-        // let detail1 = Object.assign(response,{name},{capacity},{id}, {id1})
     }
     const fetchProductCompare = async () => {
-        const response = await productApi.fetchProductApiById(idCompare)
+        const response = await productApi.fetchProductApiById(listProduct)
         setProductCompare(response)
     }
     useEffect(() => {
         fetchProductApi()
         fetchProductCompare()
-    }, [idCompare])
-    const onClickProduct = (index, index1, index2) => {
+    }, [listProduct])
+    const onClickProduct = (index, index1, index2, item) => {
         setIdType2(index2)
         setIdVersion2(index1)
-        setIdCompare(index+1)
+        setIdCompare(index)
+        setListProduct(item+1)
     }
     const onValue = (i) => {
         setValue(i)
         if(i === ''){
             console.log('hi');
-            setIdCompare('')
+            setListProduct('')
         }
-        
     }
-    console.log(value);
-    console.log(idCompare);
-    console.log(productCompare);
     return(
         <div className='compare'>
             <div className='compare__product'>
@@ -86,7 +82,7 @@ const Compare = ({match})=>{
                     <td className='col-4'>
                         <input
                             style={{pointerEvents: 'none'}}
-                            placeholder = {`${product.title}`}
+                            placeholder = {`${product.items && product.items[idItems].title}`}
                         />
                     </td>
                     <td className='col-4'>
@@ -102,7 +98,7 @@ const Compare = ({match})=>{
                     <td className='col-4'>
                         <div>
                             <img 
-                                src={product.version && product.version[idVersion].type[idType].image}
+                                src={product.items && product.items[idItems].version[idVersion].type[idType].image}
                                 style={{
                                     maxWidth: '100%',
                                     padding: '20px'
@@ -114,7 +110,7 @@ const Compare = ({match})=>{
                     {
                         !productCompare.length && value ? (
                             <img 
-                                src={productCompare.version && product.version[idVersion2].type[idType2].image}
+                                src={productCompare.items && productCompare.items[idCompare].version[idVersion2].type[idType2].image}
                                 style={{
                                     maxWidth: '100%',
                                     padding: '20px'
@@ -135,22 +131,26 @@ const Compare = ({match})=>{
                     <td className='col-2'/>
                     <td className='col-4'>
                         <span>  
-                            {   product.version && 
-                                `${product.version[idVersion].type[idType].price}`.slice(-9,-6) + '.' + 
-                                `${product.version[idVersion].type[idType].price}`.slice(-6,-3) + '.' + 
-                                `${product.version[idVersion].type[idType].price}`.slice(-3)
+                            {   
+                                
+                                // console.log(product.items[idItems].version[idVersion].type[idType].price),
+                                product.items && 
+                                `${product.items[idItems].version[idVersion].type[idType].price}`.slice(-9,-6) + '.' + 
+                                `${product.items[idItems].version[idVersion].type[idType].price}`.slice(-6,-3) + '.' + 
+                                `${product.items[idItems].version[idVersion].type[idType].price}`.slice(-3)
                             } đ
                         </span>
                     </td>
                     <td className='col-4'>
                         {
-                            productCompare.version ? (
+                            productCompare.items &&
+                            productCompare.items ? (
                             <span> 
                                 {   
-                                    productCompare.version && 
-                                    `${productCompare.version[idVersion2].type[idType2].price}`.slice(-9,-6) + '.' + 
-                                    `${productCompare.version[idVersion2].type[idType2].price}`.slice(-6,-3) + '.' + 
-                                    `${productCompare.version[idVersion2].type[idType2].price}`.slice(-3)
+                                    productCompare.items[idCompare] && 
+                                    `${productCompare.items[idCompare].version[idVersion2].type[idType2].price}`.slice(-9,-6) + '.' + 
+                                    `${productCompare.items[idCompare].version[idVersion2].type[idType2].price}`.slice(-6,-3) + '.' + 
+                                    `${productCompare.items[idCompare].version[idVersion2].type[idType2].price}`.slice(-3)
                                 } đ
                             </span>) : (<span>Giá sản phẩm</span>)
                         } 
@@ -166,27 +166,22 @@ const Compare = ({match})=>{
                     <hr/>
                     <tbody>
                     {
-                        listInformation  && product.information && listInformation.map((item, index)  =>{
-                            console.log(product.version[idVersion].capacity);
-                            let info = product.version[idVersion].capacity
-                            let detail = product.information.concat({name: 'rom',info})
-                            // let info1 = []
-                            let detail1 = []
-                            if (productCompare.information){
-                                // info1 = productCompare.version[idVersion2].capacity;
-                                detail1 = productCompare.information.concat({name: 'rom',info: `${productCompare.version[idVersion2].capacity}`})
-                            }
-                            console.log(detail1);
+                        product.items && product.items[idItems].information.map((item, index)  =>{
                             return(
-                                <tr className='row'>
-                                    <td className='col-2' style={{fontWeight: 'bold'}}>{listInformation[index].title}</td>
+                                <tr className='row' key={index}>
+                                    <td className='col-2' style={{fontWeight: 'bold'}}>{item.title}</td>
+                                    <td className='col-4'>{
+                                        item.name ==='rom' ? product.items[idItems].version[idVersion].capacity : item.info}
+                                    </td>
                                     {
-                                        
-                                    }
-                                    <td className='col-4'>{detail[index].info}</td>
-                                    {
-                                        productCompare.information &&
-                                        detail1 ? (<td className='col-4'>{detail1[index].info}</td>) : ''
+                                        productCompare && 
+                                        productCompare.items ? (
+                                        <td className='col-4'>
+                                            {
+                                                productCompare &&
+                                                productCompare.items[idCompare].information[index].name ==='rom' ? productCompare.items[idCompare].version[idVersion2].capacity : productCompare.items[idCompare].information[index].info
+                                            }
+                                        </td>) : <td className='col-4'/>
                                     }
                                 </tr>
                             )

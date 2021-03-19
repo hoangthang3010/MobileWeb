@@ -1,9 +1,13 @@
-.product{
+.dropproduct{
     background-color: #F5F8FD;
     &__drop{
+        z-index: 99;
         width: 202px;
         display: flex;
         // border: 1px solid #eaedf3;
+        link{
+            
+        }
         &__item{
             
             font-weight: 600;
@@ -13,15 +17,16 @@
             max-height: 50px;
             border-radius: 0px;
             span{
+                color: black;
                 font-size: larger;
             }
-            a{
+            p{
                 float: right;
             }
             
         }
         &__right{
-            z-index: 100;
+            z-index: 98;
             display: none;
         }
         &:hover &__right{
@@ -33,6 +38,7 @@
                 background-color: white;
                 font-weight: 600;
                 span{
+                    color: black;
                     font-size: larger;
                 }
                 a{
@@ -51,9 +57,10 @@
             background-color: white;
             font-weight: 600;
             span{
+                color: black;
                 font-size: larger;
             }
-    }
+        }
     }
 }
 

@@ -1,395 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Product.scss'
+import {useParams} from 'react-router-dom'
+import productApi from '../../api/productApi'
+import { Link } from 'react-router-dom';
 
-export default function Product() {
-  const listmenu = [
-    {
-      title: "Điện thoại di động",
-      // drop: "hi"
-      drop: [
-        {
-          name: "iPhone",
-          type: [
-            {
-              ten: 'ip11',
-            },
-            {
-              ten: 'ip12'
-            }
-          ]
-        },
-        {
-          name: "Samsung",
-          type: [
-          ]
-        },
-        {
-          name: "Xiaomi",
-          type: [
-          ]
-        },
-        {
-          name: "Oppo",
-          type: [
-          ]
-        }
-      ]
-    },
-    {
-      title: "Đồng hồ thông minh",
-      drop: [
-        {
-          name: "Apple Watch",
-          type: [
-          ]
-        },
-        {
-          name: "Samsung Watch",
-          type: [
-          ]
-        },
-        {
-          name: "Xiaomi Watch",
-          type: [
-          ]
-        },
-        {
-          name: "Oppo Watch",
-          type: [
-          ]
-        }
-      ]
-    },
-    {
-      title: "Máy tính bảng",
-      drop: [
-        {
-          name: "ho",
-          type: [
-          ]
-        },
-        {
-          name: "hu",
-          type: [
-          ]
-        },
-        {
-          name: "he",
-          type: [
-          ]
-        },
-        {
-          name: "hy",
-          type: [
-          ]
-        }
-      ]
-    },
-    {
-      title: "Laptop - Pc",
-      drop: [
-        {
-          name: "ha",
-          type: [
-          ]
-        },
-        {
-          name: "hi",
-          type: [
-          ]
-        }
-      ]
-    },
-    {
-      title: "Phụ kiện",
-      drop: [
-        {
-          name:'',
-          type: [
-          ]
-        }
-      ]
-    },
-  ]
-  const [showDrop, setShowDrop] = useState('')
-  const [showDrop1, setShowDrop1] = useState('')
-  const [id, setId] = useState()
-  const [id1, setId1] = useState()
-  const [id2, setId2] = useState()
-  const onHandleShowDrop = (index) =>{
-    setShowDrop(index)
-    setId(index)
-    setId1()
+
+export default function Product({match}) {
+  const [category, setCategory] = useState('')
+  const [product, setProduct] = useState('')
+  const fetchCategoryApi = async () => {
+    const response = await productApi.fetchCategoryApi(`category/?type=${match.params.type}`)
+    setCategory(response)
+    console.log(response);
   }
-  const onHandleShowDrop1 = (index) =>{
-    setShowDrop1(index)
-    setId1(index)
+  const fetchProductApi = async () => {
+    const response = await productApi.fetchProductApi(`product/?name=${match.params.type}`)
+    setProduct(response)
   }
-  const onHandleShowDrop2 = (index) =>{
-    setId2(index)
-  }
-  const onHandleDisShowDrop = () => {
-  }
-  const onHandleDisShowDrop1 = (index) => {
-    setId2()
-    setShowDrop1(index)
-  }
-  const onHandleDisShowDrop2 = () => {
-    setId2()
-  }
-  const onHandleDisShowDrop3 = () => {
-    setId()
-    setId1()
-    setId2()
-    setShowDrop1()
-  }
-  return (
-    <div className="product">
-      <div 
-          className="product__drop"
-          // style={{width: `${listmenu[showDrop].drop[showDrop1].type && listmenu[showDrop].drop[showDrop1].type * 200}px`}}
-          onMouseLeave={() => onHandleDisShowDrop3()}
-      >
-        <div style={{display: 'inline-grid', minWidth:'200px'}}>
+  useEffect(() => {
+    fetchCategoryApi()
+    fetchProductApi()
+  }, [])
+  const param = useParams()
+  // console.log(match.params.type);
+  // console.log(match.params.manufactory);
+  // console.log(match.params.name);
+  // console.log(match);
+  console.log(product);
+  return(
+    <div className= 'product'>
+      <div className='row product__title'>
+        <p className='col-2'></p>
+        <p className='col-10'>{category && category[0].title}</p>
+      </div>
+      <div className='card-group product__body'>
+        <div className='col-2 product__body__sidebar' style={{maxWidth:'100%'}}>
           {
-            listmenu && listmenu.map((item, index) => {
-              return (
-                <>
-                  <div 
-                    className="btn product__drop__item  dropright" 
-                    style={{ backgroundColor: `${id == index ? '#F5F8FD' :''}`}}
-                    onMouseEnter={() => onHandleShowDrop(index)}
-                    onMouseLeave={() => onHandleDisShowDrop(index)}
-                  >
-                    <span>{item.title} </span>
-                    {
-                      item.drop.length > 1  ?  <a>&rsaquo;</a> : ''
-                    }
-                  </div>
-                </>
+              category && 
+              category[0].sidebar.map((item, key) => {
+                return(
+                  <>
+                    <div className='product__body__sidebar__detail'>
+                      <p>{item.name}</p>
+                      <a></a>
+                    </div>
+                  </>
+                )
+              })
+          }
+        </div>
+        <div className='col-10 product__body__detail1 row'>
+          {
+            product &&
+            product[0].items.map((item,key)=>{
+              return(
+                // <div className='col-2' style={{padding:'10px', border:'1px solid #EEEEEE'}}>
+                //   <img src={item.image} style={{maxWidth:'100%'}}/>
+                //   <p>{item.title}</p>
+                //   <p>{item.price}</p>
+                // </div>
+                <div className="col-2" key={key}  style={{padding:'10px', border:'1px solid #EEEEEE'}}>
+                  {/* <div className="card text-center"> */}
+                      <img className="card-img-top" src={item.image} alt="Card image cap"/>
+                      <div className="card-body">
+                          <Link className='itemproduct__detail__title' to={`/purchase/${item.id}/0/0`}>
+                              <h5 className="card-title">{item.title}</h5>
+                          </Link>
+                          <span className="card-text">{item.price}</span>
+                        </div>
+                    {/* </div> */}
+                </div>
               )
             })
-          }
-        </div>
-        <div
-              style= {{  
-                        border: `${showDrop >=0 ? '1px solid #F5F8FD' : 'none'}`,
-                        // borderLeft: 'none',
-                        // minHeight: `${listmenu.length * 50}px`,
-                        backgroundColor:'white'
-              }}
-        >
-          { 
-            showDrop !== '' ? (
-              listmenu[showDrop].drop &&
-              listmenu[showDrop].drop.map((item, index) => {
-                return(item.name !== '' ? (
-                    <div  
-                        className="product__drop__right"
-                        style={{ backgroundColor: `${id1 == index ? '#F5F8FD' :''}`}}
-                        onMouseEnter={() => onHandleShowDrop1(index)}
-                        onMouseLeave={() => onHandleDisShowDrop1(index)}
-                    >
-                      <span>{item.name}</span>
-                      {
-                        listmenu[showDrop].drop[index].type.length > 1 ? <a>&rsaquo;</a> : ''
-                      }
-                    </div>
-                  ) : ''
-                )
-              })
-            ) : ''
-          }
-        </div>
-        <div
-              style= {{ 
-                        border: `${showDrop1 >=0 ? '1px solid #F5F8FD' : 'none'}`, 
-                        backgroundColor:'white'
-              }}
-        >
-          {
-            showDrop1 !== '' && listmenu[showDrop].drop[showDrop1] ? (
-              listmenu[showDrop].drop[showDrop1].type  &&
-              listmenu[showDrop].drop[showDrop1].type.map((item, index) => {
-                return(item.name !== '' ? (
-                    <div  
-                        className="product__drop__right1"
-                        style={{ backgroundColor: `${id2 == index ? '#F5F8FD' :''}`}}
-                        onMouseEnter={() => onHandleShowDrop2(index)}
-                        onMouseLeave={() => onHandleDisShowDrop2()}
-                    >
-                        <span>{item.ten}</span>
-                    </div>
-                  ) : ''
-                )
-              })
-             ) :  ''
           }
         </div>
       </div>
     </div>
   )
 }
-
-                  {/* <div className="product__dropright__item" onClick={() => onHandleDrop(index)}>
-                    <span>{item.title} </span>
-                    <a>&rsaquo;</a>
-                  </div> */}
-                  
-{/* <div className="product">
-        <div className="product__dropright btn-group dropright">
-          <button 
-                  // type="button" 
-                  className="btn btn-secondary dropdown-toggle" 
-                  // data-toggle="dropdown"
-                  // aria-haspopup="true" 
-                  // aria-expanded="false"
-          >
-            Dropright
-          </button>
-          <div className="product__dropright__right dropdown-menu">
-            <a className="dropdown-item" href="#">Action</a>
-            <a className="dropdown-item" href="#">Another action</a>
-            <a className="dropdown-item" href="#">Something else here</a>
-            <div className="dropdown-divider" />
-            <a className="dropdown-item" href="#">Separated link</a>
-          </div>
-        </div>
-    </div> */}
-{/* <div className='container__top__left '>
-        <ul>
-            <li>
-                <div className="container__top__left__dropdown">
-                    <button>Điện thoại di động</button>
-                    <div className="container__top__left__dropdown__content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className="container__top__left__dropdown">
-                    <button>Đồng hồ thông minh</button>
-                    <div className="container__top__left__dropdown__content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className="container__top__left__dropdown">
-                    <button>Máy tính bảng</button>
-                    <div className="container__top__left__dropdown__content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className="container__top__left__dropdown">
-                    <button>Laptop - Pc</button>
-                    <div className="container__top__left__dropdown__content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className="container__top__left__dropdown">
-                    <button>Phụ kiện</button>
-                    <div className="container__top__left__dropdown__content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li>Đồng hồ thông minh</li>
-            <li>Máy tính bảng</li>
-            <li>Laptop - Pc</li>
-            <li>Phụ kiện</li> 
-        </ul>
-    </div> */}
-// const [id, setId] =useState('')
-//   const [id2, setId2] =useState('')
-//   const [id3, setId3] =useState('')
-//   const [id4, setId4] =useState('')
-//   const [id5, setId5] =useState('')
-//   const onThree = () => {
-//     setId('1')
-//   }
-//   const onSeven = () => {
-//     setId2('2')
-//   }
-//   const onNhan = () => {
-//     setId3('2')
-//   }
-//   const onBang = () => {
-//     setId4('2')
-//   }
-//   const onKq = () => {
-//     setId3('2')
-//   }
-//   console.log(id);
-//   return (
-//     <div className="product">
-//         <div style={{ 
-//                       width: '200px', 
-//                       height: '300px', 
-//                       margin: '20px 200px', 
-//                       border: '1px solid black'
-//                     }}
-//         > 
-//           <span style={{marginLeft: '75px', fontWeight: '800'}}>CASIO</span>
-//           <div style={{ 
-//                         width: '180px',
-//                         height: '60px',
-//                         border: '1px solid black',
-//                         margin: '30px auto'
-//           }}>
-//             {
-              
-//               id && id === '1' ? (<><a>3</a></>) : ''
-//             }
-            
-//             {
-              
-//               id3 && id3 === '2' ? (<><a>x</a></>) : ''
-//             }
-//             {
-              
-//               id2 && id2 === '2' ? (<><a>7</a></>) : ''
-//             }
-//             {
-              
-//               id4 && id4 === '2' ? (<><a>=</a><a>28</a></>) : ''
-//             }
-//           </div>
-//           <div style={{display: 'flex', textAlign: 'center', marginTop: '20px'}}>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>9</div>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>8</div>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}} onClick={onSeven}>7</div>
-//               <div className='col-3' style={{border: '1px solid black',padding: '10px'}}>+</div>
-//               <div className='col-3' style={{border: '1px solid black',padding: '10px'}}>-</div>
-//             </div>
-//             <div style={{display: 'flex', textAlign: 'center', marginTop: '20px'}}>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>6</div>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>5</div>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>4</div>
-//               <div className='col-3' style={{border: '1px solid black',padding: '10px'}} onClick={onNhan}>x</div>
-//               <div className='col-3' style={{border: '1px solid black',padding: '10px'}}>/</div>
-//             </div>
-//             <div style={{display: 'flex', textAlign: 'center', marginTop: '20px'}}>
-//               <a className='col-2' style={{border: '1px solid black',padding: '10px'}} onClick={onThree}>3</a>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>2</div>
-//               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>1</div>
-//               <div className='col-3' style={{border: '1px solid black',padding: '10px'}} onClick={onBang}>=</div>
-//               <div className='col-3' style={{border: '1px solid black',padding: '10px'}}>.</div>
-//             </div>
-//         </div>
-//     </div>
-//   );

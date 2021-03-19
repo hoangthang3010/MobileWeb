@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {CounterContext} from '../contextapi/counterCart';
 import {ShoppingCartOutlined} from '@ant-design/icons'
+import SearchTextField from '../searchtextfield/SearchTextField'
+
 
 
 import './navbar.scss';
-
+const onValue = (i) => {
+  // setValue(i)
+  // if(i === ''){
+  //     console.log('hi');
+  //     setIdCompare('')
+  // }
+}
+const onClickProduct = () => {}
 export default function Navbar1(props) {
   const value = useContext(CounterContext)
   const amount = value.amount
@@ -30,10 +39,11 @@ export default function Navbar1(props) {
               </li>
             </Link>
           </ul>
-          <form className="form-inline my-2 my-lg-8">
+          <SearchTextField className="form-control mr-sm-2" onValue={onValue} onClickProduct={onClickProduct} />
+          {/* <form className="form-inline my-2 my-lg-8">
             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          </form> */}
         </div>
         <Link to="/card" className="header__content__box1__addShoppingCart" style={{textDecoration : "none"}}>
           <button className="navbar__card">

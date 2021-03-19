@@ -10,6 +10,10 @@ const productApi = {
     const url=`/${params}`
     return axiosClient.get(url)
   },
+  fetchCategoryApi: (params) => {
+    const url=`/${params}`
+    return axiosClient.get(url)
+  },
   fetchProductApiById: (id) => {
     const url=`/product/${id}`
     return axiosClient.get(url)

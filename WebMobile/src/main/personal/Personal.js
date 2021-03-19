@@ -58,7 +58,7 @@ const Personal = () => {
             }
             {
               
-              id6 && id6 === '2' ? (<><a>0</a></>) : ''
+              id6 && id6 === '1' ? (<><a>1</a></>) : ''
             }
             {
               
@@ -79,7 +79,7 @@ const Personal = () => {
             }
             {
               
-              id4 && id4 === '2' ? (<><a> = </a><a>13</a></>) : ''
+              id4 && id4 === '2' ? (<><a> = </a><a>0</a></>) : ''
             }
           </div>
           <div style={{display: 'flex', textAlign: 'center', marginTop: '20px'}}>
@@ -99,8 +99,11 @@ const Personal = () => {
             <div style={{display: 'flex', textAlign: 'center', marginTop: '20px'}}>
               <a className='col-2' style={{border: '1px solid black',padding: '10px'}} onClick={onThree}>3</a>
               <div className='col-2' style={{border: '1px solid black',padding: '10px'}}>2</div>
-              <div className='col-2' style={{border: '1px solid black',padding: '10px'}} onClick={onOne}>1</div>
               { id6 === '' ?
+                <div className='col-3' style={{border: '1px solid black',padding: '10px'}}onClick={onZero}>1</div> :
+                <div className='col-3' style={{border: '1px solid black',padding: '10px'}}onClick={onZero1}>1</div>
+              }
+                            { id6 === '' ?
                 <div className='col-3' style={{border: '1px solid black',padding: '10px'}}onClick={onZero}>0</div> :
                 <div className='col-3' style={{border: '1px solid black',padding: '10px'}}onClick={onZero1}>0</div>
               }

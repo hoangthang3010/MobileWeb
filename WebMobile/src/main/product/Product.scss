@@ -1,59 +1,34 @@
 .product{
-    background-color: #F5F8FD;
-    &__drop{
-        width: 202px;
-        display: flex;
-        // border: 1px solid #eaedf3;
-        &__item{
-            
+    width: 90%;
+    margin: auto;
+    &__title{
+        margin-top: 20px;
+        padding: 10px 0px;
+        p{
+            font-size: 30px;
             font-weight: 600;
-            background-color: white;
-            text-align: left;
-            padding: 15px;
-            max-height: 50px;
-            border-radius: 0px;
-            span{
-                font-size: larger;
-            }
-            a{
-                float: right;
-            }
-            
         }
-        &__right{
-            z-index: 100;
-            display: none;
-        }
-        &:hover &__right{
-                min-height: 50px;
-                display: block;
-                padding: 15px;
-                will-change: transform;
-                min-width: 200px;
-                background-color: white;
-                font-weight: 600;
-                span{
-                    font-size: larger;
+    }
+    &__body{
+        &__sidebar{
+            &__detail{
+                border: 1px solid #EEEEEE;
+                margin-bottom: 20px;
+                padding-bottom: 8px;
+                p{
+                    padding: 8px;
+                    background-color: #F7F7F7;
+                    border-bottom:  1px solid #EEEEEE;
+                    margin-bottom: 8px;
                 }
                 a{
-                    float: right;
+                    padding: 8px;
+                    margin: 8px 0px;
                 }
-        }
-        &__right1{
-            display: none;
-        }
-        &:hover &__right1{
-            min-height: 50px;
-            display: block;
-            padding: 15px;
-            will-change: transform;
-            min-width: 200px;
-            background-color: white;
-            font-weight: 600;
-            span{
-                font-size: larger;
             }
-    }
+        }
+        &__detail1{
+        }
     }
 }
 

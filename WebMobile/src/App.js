@@ -22,10 +22,13 @@ function App() {
             <Switch>
               <Route path='/' component = {Homepage} exact></Route>
               <Route path='/card' component = {Card} ></Route>
-              <Route path='/product' exact component = {Product} ></Route>
+              {/* /:manufactory/:name */}
+              <Route path='/product/:type' exact component = {Product} ></Route>
+              <Route path='/product/:type/:manufactory' exact component = {Product} ></Route>
+              <Route path='/product/:type/:manufactory/:name' exact component = {Product} ></Route>
               <Route path='/casimo' exact component = {Personal} ></Route>
-              <Route path='/product/:id/:id1/:id2' component = {Productdetail}></Route>
-              <Route path='/compare/:id/:id1/:id2' exact component = {Compare} ></Route>
+              <Route path='/purchase/:items/:id/:id1/:id2' component = {Productdetail}></Route>
+              <Route path='/compare/:items/:id/:id1/:id2' component = {Compare} ></Route>
               <Route path='/setting' ></Route>
               <Route path='/thank' ></Route>
               <Route path='/:somestring' ></Route>

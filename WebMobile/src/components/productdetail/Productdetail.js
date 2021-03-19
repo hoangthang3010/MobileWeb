@@ -9,12 +9,15 @@ const Productdetail = ({match}) => {
     const param = useParams()
     const [product, setProduct] = useState('')
     const [showRate, setShowRate] = useState(false)
+    const [idItems, setIdItems] = useState(param.id-1)
     const [idVersion, setIdVersion] = useState(match.params.id1)
     const [idType, setIdType] = useState(match.params.id2)
     const fetchProductApi = async () => {
-        const response = await productApi.fetchProductApiById(param.id)
+        const response = await productApi.fetchProductApiById(param.items)
         setProduct(response)
-      }
+        console.log(response);
+    }
+    
     useEffect(() => {
         fetchProductApi()
     }, [])
@@ -41,16 +44,24 @@ const Productdetail = ({match}) => {
             <div className="productD__top">
                 <div className="card-group">
                     <div className="col-4 productD__top__left">
-                        <img src={product.version && product.version[idVersion].type[idType].image}/>
+                        <img src={product.items && product.items[idItems].version[idVersion].type[idType].image}/>
                     </div>
                     <div className="col-4 productD__top__center">
-                        <h3>{product.title}</h3>
-                        <div className="productD__top__center__price">Giá từ: <span>{product.version && `${product.version[idVersion].type[idType].price}`.slice(-9,-6) + '.' + `${product.version[idVersion].type[idType].price}`.slice(-6,-3) + '.' + `${product.version[idVersion].type[idType].price}`.slice(-3)}đ</span></div>
+                        <h3>{product.items && product.items[idItems].title}</h3>
+                        <div className="productD__top__center__price">
+                            Giá từ: 
+                            <span>{
+                                    product.items && 
+                                    `${product.items[idItems].version[idVersion].type[idType].price}`.slice(-9,-6) + '.' +
+                                    `${product.items[idItems].version[idVersion].type[idType].price}`.slice(-6,-3) + '.' + 
+                                    `${product.items[idItems].version[idVersion].type[idType].price}`.slice(-3)}đ
+                            </span>
+                        </div>
                         <div className="productD__top__center__capacity">
                             <h1>Chọn dung lượng sản phẩm</h1>
                                 <div className="productD__top__center__color__item card-group">
-                                    {   product.version &&
-                                        product.version.map((element,index) => {
+                                    {   product.items &&
+                                        product.items[idItems].version.map((element,index) => {
                                             return (
                                                 <div className="col-4">
                                                     <div    
@@ -70,8 +81,8 @@ const Productdetail = ({match}) => {
                         <div className="productD__top__center__color">
                             <h1>Chọn màu sản phẩm</h1>
                                 <div className="productD__top__center__color__item card-group" >
-                                    {   product.version &&
-                                        product.version[idVersion].type.map((element,index) => {
+                                    {   product.items &&
+                                        product.items[idItems].version[idVersion].type.map((element,index) => {
                                             return (
                                                 <div className="col-4">
                                                     <div    
@@ -91,34 +102,40 @@ const Productdetail = ({match}) => {
                         {
                             <CounterContext.Consumer>
                                 {({buyNow, addToCart})  => 
-                                    <div>
+                                    <div style={{width: '92%', margin: 'auto'}}>
+                                        <tr className= 'row'>
+                                            <td className='col-6' style={{padding: '0px 5px'}}>
                                         <Link to='/card'>
-                                            <button className='col-6'
+                                            <button
                                                 onClick={() => 
                                                     {    
                                                         buyNow(
-                                                            product.version[idVersion].type[idType],product.title,
-                                                            product.version[idVersion].capacity, 
-                                                            product.version[idVersion].id1, 
+                                                            product.items[idItems].version[idVersion].type[idType],
+                                                            product.items[idItems].title,
+                                                            product.items[idItems].version[idVersion].capacity, 
+                                                            product.items[idItems].version[idVersion].id1, 
                                                             param.id
                                                         );
                                                     }}
                                             >
                                                 MUA NGAY
                                             </button>
-                                        </Link>
-                                        <button className='col-6'
+                                        </Link></td>
+                                        <td className='col-6' style={{padding: '0px 5px'}}>
+                                        <button
                                             onClick={() => 
                                                 {   
                                                     addToCart(
-                                                        product.version[idVersion].type[idType],
-                                                        product.title,product.version[idVersion].capacity, 
-                                                        product.version[idVersion].id1, param.id
+                                                        product.items[idItems].version[idVersion].type[idType],
+                                                        product.items[idItems].title,
+                                                        product.items[idItems].version[idVersion].capacity, 
+                                                        product.items[idItems].version[idVersion].id1, param.id
                                                     );
                                                 }}
                                         >
                                             Thêm vào giỏ hàng
-                                        </button>
+                                        </button></td>
+                                        </tr>
                                     </div>
                                 }
                             </CounterContext.Consumer>

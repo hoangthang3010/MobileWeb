@@ -19,6 +19,7 @@ function Homepage(){
     const [product, setProduct] = useState('')
     const [productList, setProductList] = useState('')
     const fetchProductApi = async () => {
+        // `product/${productList}`
         const response = await productApi.fetchProductApi(`product/${productList}`)
         setProduct(response)
       }
@@ -28,7 +29,6 @@ function Homepage(){
     const onProductList = (e) =>{
         setProductList(e.target.value)
     }
-    console.log(productList);
     return (
         <div style={{backgroundColor: '#F5F8FD'}}>
             <div className='container'>
@@ -61,13 +61,13 @@ function Homepage(){
                                 value ={productList}
                                 onChange = {onProductList}
                         >
-                            <option value="/">Tất cả sản phẩm</option>
-                            <option value="saab">Điện thoại di động</option>
+                            <option value="">Tất cả sản phẩm</option>
+                            <option value="?name=mobile">Điện thoại di động</option>
                             <option value="opel">Đồng hồ thông minh</option>
-                            <option value="audi">Máy tính bảng</option>
+                            <option value="?name=tablet">Máy tính bảng</option>
                             <option value="audi">Laptop - PC</option>
-                            <option value="/?category=2">Phụ kiện</option>
-                            <option value="/?category=1">iphone</option>
+                            <option value="?name=samsung">Phụ kiện</option>
+                            <option value="?name=iphone">iphone</option>
                         </select>
                     </div>
                     <div className='container__product__item'>

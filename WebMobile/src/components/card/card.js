@@ -34,15 +34,15 @@ const Cart = ()=>{
         })
         setProduct([...product1])
     }
-    const removeProduct = (i) =>{
-        product1.forEach((item,index) => {
-            if(i===index){
-                product1.splice(index, 1)
-            }
-        })
-        setProduct([...product1])
-    }
-    console.log(product1);
+    // const removeProduct = (i) =>{
+    //     product1.forEach((item,index) => {
+    //         if(i===index){
+    //             product1.splice(index, 1)
+    //         }
+    //     })
+    //     setProduct([...product1])
+    // }
+    // console.log(product1);
     return(
         <>
         {
@@ -59,7 +59,7 @@ const Cart = ()=>{
                         product1.map((product,index) => (
                             <div className='checkout__item card-group' key={index}>
                                 <div className='checkout__item__image col-4'>
-                                <hr /><img src={product.image} alt="Card image cap"/>                                       
+                                <hr /><img src={product.image} alt="picture"/>                                       
                                 </div>
                                 <div className='checkout__item__detail col-9'>
                                     <hr />
