@@ -46,7 +46,10 @@ export default function Product({match}) {
     <div className= 'product'>
       <div className='row product__title'>
         <p className='col-2'></p>
-        <p className='col-10'>{category && category[0].title}</p>
+        <p className='col-10'>
+          {category && category[0].title}
+          {manufactory && ` \'${manufactory}\'`}
+        </p>
       </div>
       <div className='card-group product__body'>
         <div className='col-2 product__body__sidebar' style={{maxWidth:'100%'}}>
