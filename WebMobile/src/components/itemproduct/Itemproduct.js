@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Itemproduct = ({product}) => {
     // console.log(product[0].type);
     return(
-        <div className='card-group'>
+        <div className='card-group itemproduct'>
             { 
                product && product.map((item, key) => {
                     return (
@@ -14,7 +14,7 @@ const Itemproduct = ({product}) => {
                             item.items.map((product, index) => {
                                 // console.log(product);
                                 return(
-                                    <div className="col-3" key={index}>
+                                    <div className="col-3 itemproduct__box" key={index}>
                                         <div className="card text-center">
                                             <img className="card-img-top" src={product.image} alt="Card image cap"/>
                                             <div className="card-body">

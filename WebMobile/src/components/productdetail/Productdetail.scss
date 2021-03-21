@@ -123,20 +123,29 @@
             }
         }
         &__rate{
-            margin: 0px;
+            // margin: 0px;
+            padding: 0px;
             &__box{
                 width: 100%;
                 border: 1px solid #e6e6e6;
                 border-radius: 5px;
-                .card-group{
-                    margin: 10px 5px;
-                    .col-3{
-                        padding: 5px 10px;
-                    }
-                    .col-6{
-                        padding: 5px 10px;
-                        max-width: 100%;
-                    }
+                padding: 5px 10px;
+                // .card-group{
+                //     margin: 10px 5px;
+                //     .col-3{
+                //         padding: 5px 10px;
+                //     }
+                //     .col-6{
+                //         padding: 5px 10px;
+                //         max-width: 100%;
+                //     }
+                // }
+                &__left{
+                    padding: 5px 10px;
+                }
+                &__center{
+                    padding: 5px 10px;
+                    max-width: 100%;
                 }
                 &__right{
                     // &__btn{

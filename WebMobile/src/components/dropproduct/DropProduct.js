@@ -75,26 +75,20 @@ export default function Product() {
       name: "tablet",
       drop: [
         {
-          name: "ho",
-          title:"ho",
+          name: "ipad",
+          title:"iPad",
           type: [
           ]
         },
         {
-          name: "hu",
-          title:"ho",
+          name: "samsung",
+          title:"Samsung",
           type: [
           ]
         },
         {
-          name: "he",
-          title:"ho",
-          type: [
-          ]
-        },
-        {
-          name: "hy",
-          title:"ho",
+          name: "xiaomi",
+          title:"Xiaomi",
           type: [
           ]
         }

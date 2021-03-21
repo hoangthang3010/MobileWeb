@@ -149,10 +149,19 @@ const Productdetail = ({match}) => {
                             <div  className="productD__top__right__specifications__body">
                                 {
                                     
-                                    product.information &&
-                                    product.information.map((item, index) => {
+                                    product.items &&
+                                    product.items[idItems].information.map((item, index) => {
                                         return (
-                                            <p>{product.information[index].info}</p>
+                                            <div className='row'>
+                                                <p className='col-3'>{product.items[idItems].information[index].title}:</p>
+                                                <p className='col-9'>
+                                                    {
+                                                        product.items[idItems].information[index].name ==='rom' ? 
+                                                        product.items[idItems].version[idVersion].capacity : 
+                                                        product.items[idItems].information[index].info
+                                                    }
+                                                </p>
+                                            </div>
                                         )
                                     })
                                 }
